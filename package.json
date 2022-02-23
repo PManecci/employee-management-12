@@ -1,0 +1,27 @@
+{
+  "name": "employee-management-12",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PManecci/employee-management-12.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PManecci/employee-management-12/issues"
+  },
+  "homepage": "https://github.com/PManecci/employee-management-12#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "express": "^4.17.3",
+    "inquirer": "^8.2.0",
+    "mysql2": "^2.3.3"
+  }
+}
