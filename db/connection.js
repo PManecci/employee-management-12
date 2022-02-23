@@ -8,10 +8,10 @@ const db = mysql.createConnection(
         user: 'root', 
         // Your MySQL password
         password: 'pmanecci',
-        database: 'employee',
+        database: 'company',
         port: 3306
     },
-    console.log('Connected to the employee database')
+    console.log('Connected to the company database')
 );
 
 module.exports = db;

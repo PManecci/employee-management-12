@@ -1,5 +1,7 @@
 const express = require('express');
 const db = require('./db/connection');
+const inquirer = require('inquirer');
+const table = require('console.table');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -14,10 +16,34 @@ app.use((req, res) => {
 });
 
 // Start server after DB connection
-db.connect(err => {
+db.connect(function (err) {
     if (err) throw err;
-        console.log('Database connected.');
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
+    initialPrompt();
+})
+
+function initialPrompt() {
+    inquirer.prompt({
+        type: 'list',
+        name: 'options',
+        message: 'Please make a selection from the following options:',
+        choices: [
+            "View All Departments",
+            "View All Roles",
+            "View All Employees",
+            "Add A Department",
+            "Add A Role",
+            "Add An Employee",
+            "Update An Employee Role"
+        ]
+    })
+    .then(function ({ options }) {
+        switch (options) {
+            case "View All Departments":
+                viewAllDepartments();
+                break;
+            case "View All Roles":
+                viewAllRoles();
+                break;
+        }
     });
-});
+}
