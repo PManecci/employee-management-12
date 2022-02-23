@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('./db/connection');
 const inquirer = require('inquirer');
 const table = require('console.table');
+const { add } = require('lodash');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -21,6 +22,8 @@ db.connect(function (err) {
     initialPrompt();
 })
 
+
+//Intital Prompt
 function initialPrompt() {
     inquirer.prompt({
         type: 'list',
@@ -44,6 +47,37 @@ function initialPrompt() {
             case "View All Roles":
                 viewAllRoles();
                 break;
+            case "View All Employees":
+                viewAllEmployees();
+                break;
+            case "Add A Department":
+                addDepartment();
+                break;
+            case "Add A Role":
+                addRole();
+                break;
+            case "Add An Employee":
+                addEmployee();
+                break;
+            case "Update An Employee Role":
+                updateEmployee();
+                break;
         }
     });
 }
+
+//Functions to execute selected option
+
+//View All Departments
+
+//View All Roles
+
+//View All Employees
+
+//Add A Department
+
+//Add A Role
+
+//Add An Employee
+
+//Update An Employee Role
