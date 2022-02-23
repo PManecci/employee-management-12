@@ -2,26 +2,19 @@ const express = require('express');
 const db = require('./db/connection');
 const inquirer = require('inquirer');
 const table = require('console.table');
-const { add } = require('lodash');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
 //Express middleware
-app.use(express.urlencoded({ extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-//Default response for any other request (Not Found)
-app.use((req, res) => {
-    res.status(404).end();
-});
 
 // Start server after DB connection
 db.connect(function (err) {
     if (err) throw err;
     initialPrompt();
 })
-
 
 //Intital Prompt
 function initialPrompt() {
@@ -69,10 +62,40 @@ function initialPrompt() {
 //Functions to execute selected option
 
 //View All Departments
+function viewAllDepartments() {
+    let query = `SELECT * FROM department`
+
+    db.query(query, (err, res) => {
+        if (err) throw err;
+        initialPrompt();
+
+        console.table(res);
+    });
+}
 
 //View All Roles
+function viewAllRoles() {
+    let query = `SELECT * FROM role`
+
+    db.query(query, (err, res) => {
+        if (err) throw err;
+        initialPrompt();
+
+        console.table(res);
+    });
+}
 
 //View All Employees
+function viewAllEmployees() {
+    let query = `SELECT * FROM employee`
+
+    db.query(query, (err, res) => {
+        if (err) throw err;
+        initialPrompt();
+
+        console.table(res);
+    });
+}
 
 //Add A Department
 
@@ -81,3 +104,8 @@ function initialPrompt() {
 //Add An Employee
 
 //Update An Employee Role
+
+//Default response for any other request (Not Found)
+app.use((req, res) => {
+    res.status(404).end();
+});
