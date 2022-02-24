@@ -98,10 +98,80 @@ function viewAllEmployees() {
 }
 
 //Add A Department
+function addDepartment() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "Department Name: "
+            }
+        ]).then((res) => {
+            let query = `INSERT INTO department SET ?`;
+
+            db.query(query, {name: res.name}, (err, res) => {
+                if (err) throw err;
+
+                initialPrompt();
+            });
+        });
+}
 
 //Add A Role
+function addRole() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "title",
+                message: "Enter Title for New Role: "
+            },
+            {
+                type: "input",
+                name: "salary",
+                message: "Enter Salary for Role: "
+            },
+        ]).then((res) => {
+            let query = `INSERT INTO role SET ?`;
+
+            db.query(query, {
+                title: res.title,
+                salary: res.salary,
+            }, (err, res) => {
+                if (err) throw err;
+
+                initialPrompt();
+            });
+        });
+}
 
 //Add An Employee
+function addEmployee() {
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "first_name",
+                message: "Enter Employee First Name: "
+            },
+            {
+                type: "input",
+                name: "last_name",
+                message: "Enter Employee Last Name: "
+            },
+        ]).then((res) => {
+            let query = `INSERT INTO employee SET ?`;
+
+            db.query(query, {
+                first_name: res.first_name,
+                last_name: res.last_name,
+            }, (err, res) => {
+                if (err) throw err;
+
+                initialPrompt();
+            });
+        });
+}
 
 //Update An Employee Role
 
