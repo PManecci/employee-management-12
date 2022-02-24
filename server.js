@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('./db/connection');
 const inquirer = require('inquirer');
-const table = require('console.table');
+const cTable = require('console.table');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -28,8 +28,7 @@ function initialPrompt() {
             "View All Employees",
             "Add A Department",
             "Add A Role",
-            "Add An Employee",
-            "Update An Employee Role"
+            "Add An Employee"
         ]
     })
     .then(function ({ options }) {
@@ -52,9 +51,6 @@ function initialPrompt() {
             case "Add An Employee":
                 addEmployee();
                 break;
-            case "Update An Employee Role":
-                updateEmployee();
-                break;
         }
     });
 }
@@ -69,7 +65,7 @@ function viewAllDepartments() {
         if (err) throw err;
         initialPrompt();
 
-        console.table(res);
+        console.table(['Department ID', 'Department Name'], res);
     });
 }
 
@@ -81,7 +77,7 @@ function viewAllRoles() {
         if (err) throw err;
         initialPrompt();
 
-        console.table(res);
+        console.table(['Role ID', 'Title', 'Salary', 'Department ID'], res);
     });
 }
 
@@ -93,7 +89,7 @@ function viewAllEmployees() {
         if (err) throw err;
         initialPrompt();
 
-        console.table(res);
+        console.table(['Employee ID', 'First Name', 'Last Name', 'Role ID', 'Manager ID'], res);
     });
 }
 
@@ -172,8 +168,6 @@ function addEmployee() {
             });
         });
 }
-
-//Update An Employee Role
 
 //Default response for any other request (Not Found)
 app.use((req, res) => {
